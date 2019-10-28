@@ -13,6 +13,7 @@ gem 'pg', '~> 0.18.4'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5'
+  
 gem 'bootstrap', '~> 4.3.1'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
@@ -27,9 +28,14 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+
+# Devise for user auth
 gem 'devise'
+# Slim for html
 gem "slim-rails"
+# Overcommit for git
 gem 'overcommit', '~> 0.51.0'
+# Rubocop for Rials conventions
 gem 'rubocop', require: false
 
 # Reduces boot times through caching; required in config/boot.rb
