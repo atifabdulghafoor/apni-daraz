@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title
+      | ApniDaraz
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    nav.navbar.navbar-expand-sm.bg-light
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link[href="#"]
+            | Link 1
+        li.nav-item
+          a.nav-link[href="#"]
+            | Link 2
+        li.nav-item
+          a.nav-link[href="#"]
+            | Link 3
+    p.notice
+      = notice
+    p.alert
+      = alert
+    = yield
