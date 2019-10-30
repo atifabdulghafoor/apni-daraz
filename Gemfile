@@ -41,6 +41,8 @@ gem 'slim-rails'
 gem 'overcommit', '~> 0.51.0'
 # Rubocop for Rials conventions
 gem 'rubocop-rails'
+# Rolify
+gem 'rolify'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
