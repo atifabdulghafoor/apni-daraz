@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFieldsToUsers < ActiveRecord::Migration[6.0]
   def change
     add_column :users, :username, :string
@@ -7,4 +9,3 @@ class AddFieldsToUsers < ActiveRecord::Migration[6.0]
     add_column :users, :birthdate, :Date
   end
 end
-    

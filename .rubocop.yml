@@ -1,1 +1,9 @@
 require: rubocop-rails
+
+Metrics/LineLength:
+  Max: 80
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
