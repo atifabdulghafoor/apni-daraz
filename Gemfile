@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -13,7 +15,7 @@ gem 'pg', '~> 0.18.4'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5'
-  
+
 gem 'bootstrap', '~> 4.3.1'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
@@ -32,25 +34,27 @@ gem 'jbuilder', '~> 2.7'
 # Devise for user auth
 gem 'devise'
 # Slim for html
-gem "slim-rails"
+gem 'slim-rails'
 # Overcommit for git
 gem 'overcommit', '~> 0.51.0'
 # Rubocop for Rials conventions
-gem 'rubocop', require: false
-
+gem 'rubocop-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger /
+  # console
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
+  # Access an interactive console on exception pages or by calling 'console' /
+  # anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'web-console', '>= 3.3.0'
+  # Spring speeds up development by keeping your application running in the /
+  #  background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
@@ -64,4 +68,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
