@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Role  Model
-class Role < ApplicationRecord::Migration[6.0]
+class Role < ApplicationRecord
   has_many :users, through: :users_roles
 
   belongs_to :resource,
