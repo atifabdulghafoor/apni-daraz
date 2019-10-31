@@ -1,0 +1,21 @@
+div.container style = "width: 60%"
+  h1.my-4
+    = @product.name
+  div.row
+    div.col-lg-6
+      img.img-fluid alt="" src="https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg" /
+      div.row.mt-4 
+        div.col-lg-3
+        a.link = link_to "Back", products_path, class: "btn btn-primary"  
+        - if user_signed_in? and current_user.has_role? :admin
+          div.col-lg-3
+            a.link = link_to "Edit", edit_product_path(@product), class: "btn btn-info"
+          div.col-lg-3
+            a.link = link_to "Delete", product_path(@product), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
+    div.col-lg-6
+      h3.my-3 Project Description 
+      p = @product.desc
+      h4.my-3 Category
+      p = @product.category.name 
+      h4.my-3 Price
+      p = number_to_currency(@product.price)
