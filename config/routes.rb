@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'pages#index'
+  root 'products#index'
+  resources :products
   devise_for :users
 end
