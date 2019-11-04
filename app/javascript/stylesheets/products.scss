@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.list-group {
+  z-index: 1;
+}
+
+.list-group-item {
+  height: auto;
+  font-size: 80%;
+}
+
+.list-group > .list-group {
+  display: none;
+  margin-bottom: 0;
+}
+.list-group-item:hover + .list-group,
+.list-group-item:focus + .list-group,
+.list-group-item + .list-group:hover  {
+  display: block;
+  position: absolute;
+  margin-left: 45%;
+}
+.categories,
+.subcategories {
+  width: 50%;
+}

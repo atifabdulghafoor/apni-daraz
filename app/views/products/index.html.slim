@@ -1,15 +1,21 @@
-div.container-fluid
-  div.row
-    - @products.each do |product|    
-      div.col-lg-3.mt-2
-        .card style=("width: 18rem;") 
-          img.card-img-top alt=("Card image cap") src="https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg" /
-          .card-body
-            h6.card-title = product.name
-          ul.list-group.list-group-flush
-            li.list-group-item  = number_to_currency(product.price)
-          .card-body
-            a.card-link = link_to "Go", product_path(product), class: "stretched-class btn btn-primary"
-            / - if user_signed_in? and current_user.has_role? :admin
-            /   a.card-link = link_to "Edit", edit_product_path(product)
-            /   a.card-link = link_to "Delete", product_path(product), method: :delete, data: {confirm: "Are you sure?"}
+div.container-fluid 
+  div.row 
+    div.col-lg-3
+      h3 Category
+      .list-group.categories
+        - @categories.main.each do |category|
+          =link_to category.name, products_path(category: category.name), class: "list-group-item list-group-item-action"
+          .list-group.subcategories 
+            - category.subcategories.each do |sub|
+              =link_to sub.name, products_path(category: sub.name), class: "list-group-item list-group-item-action"
+    div.col-lg-8
+      div.row
+        - @products.each do |product|    
+          div.col-lg-3.mt-1
+            .card style=("height: 90%") 
+              img.card-img-top style=("height: 7.5rem;") alt=("Card image cap") src="https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg" /
+              .card-body style = "overflow: hidden;"
+                h6.card-title = product.name
+              .card-body
+                = number_to_currency(product.price) 
+                = link_to "", product_path(product), class: "stretched-link"

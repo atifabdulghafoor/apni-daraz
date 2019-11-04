@@ -4,5 +4,6 @@ div.container style = "width: 50%"
     = f.text_area :desc
     = f.number_field :price, min: 0, prepend: "$", append: ".00"
     = f.number_field :qty, min: 0
+    = f.collection_select :category_id, @categories, :id, :name
     = f.submit @product.persisted? ? "Update Product" : "Create Product"
   =  link_to "Go Back", products_path, class: "btn btn-primary"
