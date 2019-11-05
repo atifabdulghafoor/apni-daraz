@@ -1,0 +1,15 @@
+.card style=("border: none; border-bottom: 1px solid #6c757d;")
+  .card-body
+    blockquote.blockquote.mb-0
+      p = review.content
+      footer.blockquote-footer
+        = review.user.firstname.concat(" ").concat(review.user.lastname)
+        small
+          |  Submitted #{time_ago_in_words(review.created_at)} ago
+  .card-body style=("padding-left: 20%")
+    = render review.reviews
+
+- unless review.reviews.exists?
+  = bootstrap_form_for [review, Review.new] do |f|
+    = f.text_area :content, required: true, skip_label: true, placeholder: "Add a Reply"
+    = f.submit "Reply"

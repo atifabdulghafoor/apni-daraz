@@ -3,18 +3,21 @@
 # Reviews Controller
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
-  befor_action :set_reviewable, only: %i[create]
+  before_action :set_reviewable, only: %i[create]
 
   def new
     @review = Review.new
   end
 
   def create
-    @review = @reviewable.replies.build(review_params)
+    @review = @reviewable.reviews.build(review_params)
+    @review.user_id = current_user.id
     if @review.save
-      redirect_to :back, notice: 'Review Was Succesfully Posted'
+      redirect_back(fallback_location: product_path(@reviewable),
+                    notice: 'Review Was Succesfully Posted')
     else
-      redirect_to :back, notice: 'Failed to Post the Review'
+      redirect_back(fallback_location: product_path(@reviewable),
+                    notice: 'Failed to Post a Review')
     end
   end
 
