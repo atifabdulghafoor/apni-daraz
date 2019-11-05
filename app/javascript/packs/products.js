@@ -1,12 +1,6 @@
 $(document).hover(function(){
-  $("#product_parent_category_id").change(function(){
+  $("#product_parent_category").change(function(){
     var selectedOption = $(this).find(":selected").val();
-    if(selectedOption) {
-      $('#product-subcategory').removeClass('hide').addClass('show');
-    }
-    else { 
-      $('#product-subcategory').removeClass('show').addClass('hide');
-    }
     $.ajax({
       url:  "/products/new",
       dataType: "json",
@@ -15,6 +9,12 @@ $(document).hover(function(){
           return row.parent_id == selectedOption
         })
         // console.log(subcategories)
+        var parent_categories = data.filter(function(row){
+          return row.parent_id != null
+        })
+        if(!selectedOption){
+          subcategories = parent_categories;
+        }
         $('#product_category_id').empty();
         $('#product_category_id').append($("<option>Select</option>").val(undefined));
         $.each(subcategories, function($index, $value) {

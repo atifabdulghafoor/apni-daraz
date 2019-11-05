@@ -4,9 +4,11 @@ div.container style = "width: 50%"
     = f.text_area :desc
     = f.number_field :price, min: 0, prepend: "$", append: ".00", required: true
     = f.number_field :qty, min: 0, required: true
+
     #product-category  
-      = f.collection_select :parent_category_id, @categories.main, :id, :name, required: true, prompt: "Select"
-    #product-subcategory.hide
-      = f.collection_select :category_id, @categories.subcategories, :id, :name, label: "Subcategory", required: true, prompt: "Select"
+      - selected = @product.persisted? ? {selected: @product.category.parent_id} : {selected: 2}
+      = f.collection_select :parent_category, @categories.main, :id, :name, required: true, include_blank: "Select", **selected
+    #product-subcategory
+      = f.collection_select :category_id, @categories.subcategories, :id, :name, label: "Subcategory", required: true, include_blank: "Select"
     = f.submit @product.persisted? ? "Update Product" : "Create Product"
   =  link_to "Go Back", products_path, class: "btn btn-primary"

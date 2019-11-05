@@ -4,7 +4,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_product, only: %i[show edit update destroy]
-  before_action :set_categories, only: %i[new index]
+  before_action :set_categories, only: %i[new index edit]
 
   def index
     @products = if params.key?(:category)
