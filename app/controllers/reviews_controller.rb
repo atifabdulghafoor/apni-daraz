@@ -9,7 +9,14 @@ class ReviewsController < ApplicationController
     @review = Review.new
   end
 
-  def create; end
+  def create
+    @review = @reviewable.replies.build(review_params)
+    if @review.save
+      redirect_to :back, notice: 'Review Was Succesfully Posted'
+    else
+      redirect_to :back, notice: 'Failed to Post the Review'
+    end
+  end
 
   def edit; end
 
