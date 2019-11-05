@@ -8,7 +8,7 @@ div.container-fluid
           .list-group.subcategories 
             - category.subcategories.each do |sub|
               =link_to sub.name, products_path(category: sub.name), class: "list-group-item list-group-item-action"
-    div.col-lg-8
+    div.col-lg-6
       div.row
         - @products.each do |product|    
           div.col-lg-3.mt-1

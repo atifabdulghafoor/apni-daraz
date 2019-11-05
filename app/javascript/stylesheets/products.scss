@@ -10,7 +10,7 @@
 
 .list-group-item {
   height: auto;
-  font-size: 80%;
+  font-size: 90%;
 }
 
 .list-group > .list-group {
@@ -27,4 +27,12 @@
 .categories,
 .subcategories {
   width: 50%;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }
