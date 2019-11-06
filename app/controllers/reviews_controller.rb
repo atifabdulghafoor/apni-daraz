@@ -3,7 +3,7 @@
 # Reviews Controller
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_reviewable, only: %i[create]
+  before_action :set_reviewable, only: %i[create destroy]
 
   def new
     @review = Review.new
@@ -25,7 +25,16 @@ class ReviewsController < ApplicationController
 
   def update; end
 
-  def destroy; end
+  def destroy
+    @review = Review.find(params[:id])
+    if @review.destroy
+      redirect_back(fallback_location: product_path(@reviewable),
+                    notice: 'Review Was Succesfully Deleted')
+    else
+      redirect_back(fallback_location: product_path(@reviewable),
+                    notice: 'Failed to Delete a Review')
+    end
+  end
 
   private
 

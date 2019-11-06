@@ -1,0 +1,10 @@
+.card style=("padding-left:20% ;border: none; padding: 0;")
+  .card-body
+    blockquote.blockquote.mb-0
+      p = reply.content
+      footer.blockquote-footer
+        = reply.user.firstname.concat(" ").concat(reply.user.lastname)
+        small
+          |  Submitted #{time_ago_in_words(reply.created_at)} ago
+        - if reply.user == current_user 
+          = render partial: 'reviews/link', locals: { review: reply }  

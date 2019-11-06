@@ -1,4 +1,4 @@
-.card style=("border: none; border-bottom: 1px solid #6c757d;")
+.card style=("padding: 0; margin: 0;")
   .card-body
     blockquote.blockquote.mb-0
       p = review.content
@@ -6,10 +6,12 @@
         = review.user.firstname.concat(" ").concat(review.user.lastname)
         small
           |  Submitted #{time_ago_in_words(review.created_at)} ago
-  .card-body style=("padding-left: 20%")
-    = render review.reviews
+        - if (review.user == current_user) or (current_user.has_role? :admin)
+          = render partial: 'reviews/link', locals: { review: review }
+  .card-body style=('padding-left: 20%')
+    = render partial: 'reviews/reply', collection: review.reviews.order('created_at')
 
-- unless review.reviews.exists?
-  = bootstrap_form_for [review, Review.new] do |f|
-    = f.text_area :content, required: true, skip_label: true, placeholder: "Add a Reply"
-    = f.submit "Reply"
+  .card-body style=('padding-left: 20%')
+    = bootstrap_form_for [review, Review.new] do |f|
+      = f.text_field :content, required: true, skip_label: true, placeholder: "Add a Reply"
+      = f.submit "Reply"

@@ -1,0 +1,2 @@
+a.link = link_to "Edit", edit_polymorphic_path([review.reviewable, review]), class: "btn btn-info ml-3"
+a.link = link_to "Delete", polymorphic_path([review.reviewable, review]), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger ml-3"
