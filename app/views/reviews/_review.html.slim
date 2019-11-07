@@ -9,7 +9,7 @@
           = render partial: 'reviews/link', locals: { review: review }
   #review-replies
     .card-body
-      = render partial: 'reviews/reply', collection: review.reviews.order('created_at')
+      = render partial: 'reviews/reply', collection: review.reviews.order(:created_at)
 
     .card-body
       = bootstrap_form_for [review, Review.new] do |f|

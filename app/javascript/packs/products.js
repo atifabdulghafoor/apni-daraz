@@ -1,6 +1,13 @@
 $(document).on('turbolinks:load', function(){
+  $("#product_category_id").prop('disabled', true)
   $("#product_parent_category").change(function(){
     var selectedOption = $(this).find(":selected").val();
+    if(selectedOption) {
+      $("#product_category_id").prop('disabled', false)
+    } 
+    else {
+      $("#product_category_id").prop('disabled', true)
+    }
     $.ajax({
       url:  "/categories_list",
       type: "post",
