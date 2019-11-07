@@ -11,7 +11,6 @@ class ReviewsController < ApplicationController
 
   def create
     @review = @reviewable.reviews.build(review_params)
-    @review.user_id = current_user.id
     if @review.save
       redirect_back(fallback_location: product_path(@reviewable),
                     notice: 'Review Was Succesfully Posted')
@@ -39,7 +38,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:content)
+    params.require(:review).permit(:content, :user_id)
   end
 
   def set_reviewable

@@ -1,11 +1,11 @@
 div.container style = "width: 50%"
-  = bootstrap_form_with(model: @product, local: true) do |f|
+  = bootstrap_form_with model: @product, local: true, id: "product-form" do |f|
     = f.text_field :name, required: true
     = f.text_area :desc
     = f.number_field :price, min: 0, prepend: "$", append: ".00", required: true
     = f.number_field :qty, min: 0, required: true
     - selected = @product.persisted? ? {selected: @product.category.parent_id} : {selected: 2}
     = f.collection_select :parent_category, @categories.main, :id, :name, required: true, include_blank: "Select", **selected
-    = f.collection_select :category_id, @categories.subcategories, :id, :name, label: "Subcategory", required: true, include_blank: "Select"
+    = f.collection_select :category_id, [], :id, :name, label: "Subcategory", required: true, include_blank: "Select"
     = f.submit @product.persisted? ? "Update Product" : "Create Product"
   =  link_to "Go Back", products_path, class: "btn btn-primary"

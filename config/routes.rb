@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   resources :products, concerns: :reviewable
   resources :reviews, concerns: :reviewable
   
+  post 'categories_list' => "categories#categories_list", as: :categories_list
+
   devise_for :users
 end

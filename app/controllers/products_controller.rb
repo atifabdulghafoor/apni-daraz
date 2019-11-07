@@ -5,33 +5,24 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_product, only: %i[show edit update destroy]
   before_action :set_categories, only: %i[new index edit]
+  before_action :set_products, only: %i[index]
 
-  def index
-    @products = if params.key?(:category)
-                  get_products_by_category(params[:category])
-                else
-                  Product.all
-                end
-  end
+  def index; end
 
   def show; end
 
   def new
     @product = Product.new
-    respond_to do |format|
-      format.html
-      format.xml  { render xml: @categories }
-      format.json { render json: @categories }
-    end
   end
 
   def create
-    @product = Product.new(product_params)
-    @product.user_id = current_user.id
+    @product = current_user.products.build(product_params)
     if @product.save
       redirect_to @product
+      flash[:notice] = 'Product Added Successfully'
     else
       render 'new'
+      flash[:notice] = 'Failed to Add Product'
     end
   end
 
@@ -43,13 +34,17 @@ class ProductsController < ApplicationController
       flash[:notice] = 'Product Updated Successfully'
     else
       render 'edit'
+      flash[:notice] = 'Failed to Update'
     end
   end
 
   def destroy
-    @product.destroy
-    flash[:notice] = 'Product Deleted Successfully'
-    redirect_to products_path
+    if @product.destroy
+      redirect_to products_path
+      flash[:notice] = 'Product Deleted Successfully'
+    else
+      flash[:notice] = 'Failed to Delete'
+    end
   end
 
   private
@@ -62,6 +57,14 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def set_products
+    @products = if params.key?(:category)
+                  get_products_by_category(params[:category])
+                else
+                  Product.all
+                end
+  end
+
   def set_categories
     @categories = Category.all
   end
@@ -69,8 +72,7 @@ class ProductsController < ApplicationController
   def get_products_by_category(category)
     @category = Category.find_by(name: category)
     @products = if @category.parent_category.nil?
-                  Product.where(category: @category) |
-                    Product.where(category: @category.subcategories)
+                  Product.where(category: @category.subcategories)
                 else
                   Product.where(category: @category)
                 end

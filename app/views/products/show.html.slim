@@ -25,7 +25,8 @@
     .container style=("width: 75%")
       = bootstrap_form_for [@product, Review.new] do |f|
         = f.text_area :content, required: true, skip_label: true, placeholder: "Add a Review"
+        = f.hidden_field :user_id, skip_label: true, value: current_user.id, hide: true
         = f.submit "Add a Review"
   .row.mt-4
-    .container style=("width: 75%")   
+    .container.overflow-auto style=("width: 75%")   
       = render @product.reviews

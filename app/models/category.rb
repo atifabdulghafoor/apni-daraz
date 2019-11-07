@@ -9,5 +9,5 @@ class Category < ApplicationRecord
                            dependent: :destroy, inverse_of: :parent_category
   has_many :products, dependent: :destroy
   scope :main, -> { where(parent_id: nil) }
-  scope :subcategories, -> { where('parent_id IS NOT ?', nil) }
+  scope :subcategories, -> { where.not(parent_id: nil) }
 end
