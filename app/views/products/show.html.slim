@@ -1,4 +1,4 @@
-.container style = "width: 60%"
+#product-show.container
   h1.my-4
     = @product.name
   .row
@@ -19,14 +19,14 @@
       p = @product.category.name 
       h4.my-3 Price
       p = number_to_currency(@product.price)
-  .row.mt-4 style = "background-color: #294DFF; padding-left: 20px; padding-top: 5px; color: white; border-radius: 7px"
+  #review-bar.row.mt-4
     h5 REVIEWS
   .row.mt-4
-    .container style=("width: 75%")
+    #review-form.container
       = bootstrap_form_for [@product, Review.new] do |f|
         = f.text_area :content, required: true, skip_label: true, placeholder: "Add a Review"
         = f.hidden_field :user_id, skip_label: true, value: current_user.id, hide: true
         = f.submit "Add a Review"
   .row.mt-4
-    .container.overflow-auto style=("width: 75%")   
+    #reviews.container.overflow-auto 
       = render @product.reviews

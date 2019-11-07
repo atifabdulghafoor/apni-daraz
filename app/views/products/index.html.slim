@@ -12,9 +12,9 @@ div.container-fluid
       div.row
         - @products.each do |product|    
           div.col-lg-3.mt-1
-            .card style=("height: 90%") 
-              img.card-img-top style=("height: 7.5rem;") alt=("Card image cap") src="https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg" /
-              .card-body style = "overflow: hidden;"
+            .card
+              img.card-img-top alt=("Card image cap") src="https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg" /
+              #card-title.card-body
                 h6.card-title = product.name
               .card-body
                 = number_to_currency(product.price) 

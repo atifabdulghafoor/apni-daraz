@@ -4,6 +4,63 @@
   padding: 0;
 }
 
+#product-form {
+  width: 75%; 
+}
+
+
+.card {
+  height: 90%;
+}
+
+.card-img-top {
+  height: 7.5rem;
+}
+
+#card-title {
+  overflow: hidden;
+}
+
+#product-show {
+  width: 60%;
+}
+
+#review-bar {
+  background-color: #294DFF;
+  padding-left: 20px; 
+  padding-top: 5px; 
+  color: white; 
+  border-radius: 7px
+}
+
+
+#review-form {
+  width: 75%;
+}
+
+#reviews {
+  height: 750px;
+  width: 75%;
+}
+
+#review {
+  padding: 0; 
+  margin: 0;
+  height: auto;
+}
+
+#review-replies {
+  padding-left: 20%;
+}
+
+#reply {
+  padding-left:20%;
+  border: none; 
+  padding: 0;
+  margin: 0;
+}
+
+
 .list-group {
   z-index: 1;
 }
