@@ -19,3 +19,15 @@ div.container-fluid
               .card-body
                 = number_to_currency(product.price) 
                 = link_to "", product_path(product), class: "stretched-link"
+        - if (current_user) && policy(current_user).index? 
+          #Add-Product.col-lg-3.mt-1
+            .card
+              img.card-img-top.mt-4 alt=("Card image cap") src="https://image.flaticon.com/icons/svg/32/32339.svg" /
+              #card-title.card-body
+                h6.card-title.mt-4.text-lg-center Add Product
+                = link_to "", new_product_path, class: "stretched-link"
+
+              
+
+
+      

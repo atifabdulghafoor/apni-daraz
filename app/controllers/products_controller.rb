@@ -13,10 +13,12 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    authorize @product
   end
 
   def create
     @product = current_user.products.build(product_params)
+    authorize @product
     if @product.save
       redirect_to @product
       flash[:notice] = 'Product Added Successfully'
