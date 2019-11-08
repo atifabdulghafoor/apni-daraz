@@ -2,6 +2,8 @@
 
 # Product Policy
 class ProductPolicy < ApplicationPolicy
+  attr_reader :user, :product
+
   def new?
     admin?
   end

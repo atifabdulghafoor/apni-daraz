@@ -11,12 +11,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = @reviewable.reviews.build(review_params)
+    authorize @review
     if @review.save
       redirect_back(fallback_location: product_path(@reviewable),
                     notice: 'Review Was Succesfully Posted')
     else
       redirect_back(fallback_location: product_path(@reviewable),
-                    notice: 'Failed to Post a Review')
+                    alert: 'Failed to Post a Review')
     end
   end
 
@@ -26,12 +27,13 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
+    authorize @review
     if @review.destroy
       redirect_back(fallback_location: product_path(@reviewable),
                     notice: 'Review Was Succesfully Deleted')
     else
       redirect_back(fallback_location: product_path(@reviewable),
-                    notice: 'Failed to Delete a Review')
+                    alert: 'Failed to Delete a Review')
     end
   end
 

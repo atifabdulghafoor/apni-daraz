@@ -6,4 +6,4 @@
         = reply.user.firstname.concat(" ").concat(reply.user.lastname)
         small
           |  Submitted #{time_ago_in_words(reply.created_at)} ago
-          = render partial: 'reviews/link', locals: { review: reply }  
+          = render partial: 'reviews/link', locals: { review: reply }

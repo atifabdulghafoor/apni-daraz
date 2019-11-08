@@ -23,10 +23,11 @@
     h5 REVIEWS
   .row.mt-4
     #review-form.container
-      = bootstrap_form_for [@product, Review.new] do |f|
-        = f.text_area :content, required: true, skip_label: true, placeholder: "Add a Review"
-        = f.hidden_field :user_id, skip_label: true, value: user_signed_in? ? current_user.id : nil
-        = f.submit "Add a Review"
+      - if policy(Review.new).create?
+        = bootstrap_form_for [@product, Review.new] do |f|
+          = f.text_area :content, required: true, skip_label: true, placeholder: "Add a Review"
+          = f.hidden_field :user_id, skip_label: true, value: current_user&.id
+          = f.submit "Add a Review"
   .row.mt-4
-    #reviews.container.overflow-auto 
+    #reviews.container.overflow-auto
       = render @product.reviews

@@ -14,5 +14,5 @@
     .card-body
       = bootstrap_form_for [review, Review.new] do |f|
         = f.text_field :content, required: true, skip_label: true, placeholder: "Add a Reply"
-        = f.hidden_field :user_id, skip_label: true, value: user_signed_in? ? current_user.id : nil
+        = f.hidden_field :user_id, skip_label: true, value: current_user&.id
         = f.submit "Reply"

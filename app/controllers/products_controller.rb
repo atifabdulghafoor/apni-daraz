@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
       flash[:notice] = 'Product Added Successfully'
     else
       render 'new'
-      flash[:notice] = 'Failed to Add Product'
+      flash[:alert] = 'Failed to Add Product'
     end
   end
 
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
       flash[:notice] = 'Product Updated Successfully'
     else
       render 'edit'
-      flash[:notice] = 'Failed to Update'
+      flash[:alert] = 'Failed to Update'
     end
   end
 
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
       flash[:notice] = 'Product Deleted Successfully'
     else
-      flash[:notice] = 'Failed to Delete'
+      flash[:alert] = 'Failed to Delete'
     end
   end
 
