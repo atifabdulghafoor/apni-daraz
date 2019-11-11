@@ -10,13 +10,14 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[firstname lastname \
-                                                         email birthdate \
-                                                         address password])
+                                                         birthdate \
+                                                         address \
+                                                         image])
     devise_parameter_sanitizer.permit(:account_update, keys: %i[firstname \
-                                                                lastname email \
+                                                                lastname \
                                                                 birthdate \
                                                                 address \
-                                                                password])
+                                                                image])
   end
 
   private

@@ -3,7 +3,20 @@
     = @product.name
   .row
     .col-lg-6
-      img.img-fluid alt="" src="https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg" /
+      #product-images-carousel.carousel.slide data-ride="carousel" 
+        ol.carousel-indicators
+          - @product.images.each.with_index(0) do |image, index|
+            li class=("#{index.zero? ? 'active' : ''}") data-slide-to="#{index}" data-target="#product-images-carousel" 
+        .carousel-inner
+          - @product.images.each.with_index(0) do |image, index|
+            div class=("carousel-item #{index.zero? ? 'active' : ''}") 
+              img.d-block.w-100 alt=("Slide - #{index+1}") src=url_for(image)
+        a.carousel-control-prev data-slide="prev" href="#product-images-carousel" role="button" 
+          span.carousel-control-prev-icon aria-hidden="true"
+          span.sr-only Previous
+        a.carousel-control-next data-slide="next" href="#product-images-carousel" role="button" 
+          span.carousel-control-next-icon aria-hidden="true" 
+          span.sr-only Next
       .row.mt-4 
         .col-lg-3
         a.link = link_to "Back", products_path, class: "btn btn-primary"  

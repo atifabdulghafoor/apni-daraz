@@ -12,8 +12,9 @@ div.container-fluid
       div.row
         - @products.each do |product|    
           div.col-lg-3.mt-1
+            - product_image = product.images.attached? ? url_for(product.images.first) : "https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg"
             .card
-              img.card-img-top alt=("Card image cap") src="https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg" /
+              img.card-img-top alt=("Card image cap") src=(product_image)
               #card-title.card-body
                 h6.card-title = product.name
               .card-body
