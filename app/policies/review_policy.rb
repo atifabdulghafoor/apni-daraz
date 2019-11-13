@@ -3,7 +3,8 @@
 # Review Policy
 class ReviewPolicy < ApplicationPolicy
   def create?
-    return true unless admin? || moderator?
+    return true unless (admin? && (review.reviewable_type == 'Product')) ||
+                       (moderator? && (review.reviewable_type == 'Product'))
   end
 
   def show_links?
@@ -12,6 +13,10 @@ class ReviewPolicy < ApplicationPolicy
 
   def destroy?
     return true if owner? || admin? || moderator?
+  end
+
+  def show_form?
+    return true unless admin? || moderator?
   end
 
   private

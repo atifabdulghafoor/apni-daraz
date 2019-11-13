@@ -10,7 +10,7 @@ div.container-fluid
               =link_to sub.name, products_path(category: sub.name), class: "list-group-item list-group-item-action"
     div.col-lg-6
       div.row
-        - @products.each do |product|    
+        - @products.order(:created_at).each do |product|    
           div.col-lg-3.mt-1
             - product_image = product.images.attached? ? url_for(product.images.first) : "https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg"
             .card

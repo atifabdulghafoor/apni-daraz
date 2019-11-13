@@ -10,4 +10,5 @@ class Category < ApplicationRecord
   has_many :products, dependent: :destroy
   scope :main, -> { where(parent_id: nil) }
   scope :subcategories, -> { where.not(parent_id: nil) }
+  resourcify
 end

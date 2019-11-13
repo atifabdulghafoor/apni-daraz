@@ -5,12 +5,9 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_reviewable, only: %i[create destroy]
 
-  def new
-    @review = Review.new
-  end
-
   def create
-    @review = @reviewable.reviews.build(review_params)
+    @review = current_user.reviews.build(review_params)
+    @review.reviewable = @reviewable
     authorize @review
     if @review.save
       redirect_back(fallback_location: product_path(@reviewable),
@@ -40,7 +37,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:content, :user_id)
+    params.require(:review).permit(:content)
   end
 
   def set_reviewable

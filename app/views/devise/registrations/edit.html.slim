@@ -11,7 +11,7 @@
     .field
       = f.text_field :firstname, required: true
     .field
-      = f.text_field :lastname, required: true  
+      = f.text_field :lastname, required: true
     .field
       = f.email_field :email, autofocus: true, autocomplete: "email"
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?

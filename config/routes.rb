@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'products#index'
   resources :products
   resources :categories
-
+  
   concern :reviewable do
     resources :reviews
   end

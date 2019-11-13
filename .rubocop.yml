@@ -7,3 +7,4 @@ AllCops:
   Exclude:
     - 'db/**/*'
     - 'config/**/*'
+    - 'app/models/role.rb'
