@@ -2,7 +2,7 @@
   $("#review_content").val("")
   $("#reviews").prepend("<%= j render @review %>")
 <% else %>
-  $("#replyModal-<%= @review.reviewable.id%> #close").click()
+  $("#replyModal-<%= @review.reviewable.id%> .close").click()
   $("#replyModal-<%= @review.reviewable.id%> #review_content").val("")
   $("#review-<%= @review.reviewable.id%> .review-replies .card-body").first().append("<%= j render partial: 'reviews/reply', locals: { reply: @review } %>")
 <% end %>

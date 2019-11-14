@@ -29,6 +29,9 @@ html
                 = link_to "Profile", edit_user_registration_path, class: "nav-link"
               li.nav-item
                 = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link"
+              - if current_user.has_role? :admin
+                li.nav-item
+                  = link_to "Admin Dashboard", rails_admin.dashboard_path, class: "nav-link"
           - else
               li.nav-item
                 = link_to "Log In", new_user_session_path, class: "nav-link"

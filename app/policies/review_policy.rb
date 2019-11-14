@@ -7,16 +7,24 @@ class ReviewPolicy < ApplicationPolicy
                        (review.reviewable_type == 'Product')
   end
 
-  def show_links?
-    return true if owner? || admin? || moderator?
-  end
-
   def destroy?
     return true if owner? || admin? || moderator?
   end
 
   def show_form?
     return true unless admin? || moderator?
+  end
+
+  def update?
+    return true if owner?
+  end
+
+  def show_destroy_link?
+    return true if owner? || admin? || moderator?
+  end
+
+  def show_update_link?
+    return true if owner?
   end
 
   private

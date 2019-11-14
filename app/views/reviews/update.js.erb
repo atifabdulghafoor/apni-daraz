@@ -1,0 +1,3 @@
+$("#reviewModal-<%= @review.id%> .close").click()
+$("#review-<%= @review.id%> #content").html('')
+$("#review-<%= @review.id%> #content").html("<%= j @review.content %>")

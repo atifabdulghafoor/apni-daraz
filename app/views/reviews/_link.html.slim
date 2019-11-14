@@ -1,4 +1,7 @@
-- if policy(review).show_links?  
-  / = link_to "Edit", edit_polymorphic_path([review.reviewable, review]), class: "btn btn-info ml-3"
-  = link_to polymorphic_path([review.reviewable, review], product: @product), remote: true, method: :delete, data: {confirm: "Are you sure?"}, class: "btn ml-5"
+- if policy(review).show_update_link?  
+  = link_to '#', class: "btn ml-5", data: { target: "#reviewModal-#{review.id}", toggle: "modal" }
+    i.fa.fa-edit.fa-lg
+- if policy(review).show_destroy_link?
+  = link_to polymorphic_path([review.reviewable, review], product: @product), remote: true, method: :delete, data: {confirm: "Are you sure?"}, class: "btn ml-1"
     i.fa.fa-trash.fa-lg
+= render partial: 'reviews/form', locals: { review: review, reviewable: review.reviewable }

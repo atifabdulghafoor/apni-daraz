@@ -17,23 +17,21 @@
         a.carousel-control-next data-slide="next" href="#product-images-carousel" role="button" 
           span.carousel-control-next-icon aria-hidden="true" 
           span.sr-only Next
-      .row.mt-4 
-        .col-lg-3
-        = link_to products_path, class: "btn btn-primary"
-          i.fa.fa-arrow-left.fa-lg  
-        - if current_user && policy(@product).show?
-          .col-lg-3.offset-2
-            = link_to edit_product_path(@product), class: "btn btn-info mr-3"
-              i.fa.fa-edit.fa-lg
-            = link_to product_path(@product), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
-              i.fa.fa-trash.fa-lg
     .col-lg-6
       h3.my-3 Project Description 
-      p = @product.desc
+      p = @product.description
       h4.my-3 Category
       p = @product.category.name 
       h4.my-3 Price
       p = number_to_currency(@product.price)
+      .row.mt-4 
+        = link_to products_path, class: "btn btn-primary mr-2 w-25"
+          i.fa.fa-arrow-left.fa-lg  
+        - if current_user && policy(@product).show?
+            = link_to edit_product_path(@product), class: "btn btn-info mr-2"
+              i.fa.fa-edit.fa-lg
+            = link_to product_path(@product), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
+              i.fa.fa-trash.fa-lg
   #review-bar.row.mt-4
     h5 REVIEWS
   .row.mt-4
