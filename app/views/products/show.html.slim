@@ -19,12 +19,14 @@
           span.sr-only Next
       .row.mt-4 
         .col-lg-3
-        a.link = link_to "Back", products_path, class: "btn btn-primary"  
+        = link_to products_path, class: "btn btn-primary"
+          i.fa.fa-arrow-left.fa-lg  
         - if current_user && policy(@product).show?
-          .col-lg-3
-            a.link = link_to "Edit", edit_product_path(@product), class: "btn btn-info"
-          .col-lg-3
-            a.link = link_to "Delete", product_path(@product), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
+          .col-lg-3.offset-2
+            = link_to edit_product_path(@product), class: "btn btn-info mr-3"
+              i.fa.fa-edit.fa-lg
+            = link_to product_path(@product), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
+              i.fa.fa-trash.fa-lg
     .col-lg-6
       h3.my-3 Project Description 
       p = @product.desc
@@ -37,9 +39,10 @@
   .row.mt-4
     #review-form.container
       - if policy(Review.new).show_form?
-        = bootstrap_form_for [@product, Review.new] do |f|
+        = bootstrap_form_for [@product, Review.new], remote: true do |f|
           = f.text_area :content, required: true, skip_label: true, placeholder: "Add a Review"
+          = f.hidden_field :product, value: @product.id, name: 'product'
           = f.submit "Add a Review"
   .row.mt-4
     #reviews.container.overflow-auto
-      = render @product.reviews
+      = render partial: 'reviews/review', collection: @product.reviews.order(created_at: :desc)

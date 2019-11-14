@@ -3,34 +3,31 @@
 # Reviews Controller
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_reviewable, only: %i[create destroy]
+  before_action :set_reviewable, only: %i[create]
+  before_action :set_product, only: %i[create destroy]
 
   def create
     @review = current_user.reviews.build(review_params)
     @review.reviewable = @reviewable
     authorize @review
-    if @review.save
-      redirect_back(fallback_location: product_path(@reviewable),
-                    notice: 'Review Was Succesfully Posted')
-    else
-      redirect_back(fallback_location: product_path(@reviewable),
-                    alert: 'Failed to Post a Review')
+    msg = @review.save! == true ? 'Review Posted' : 'Failed to Post'
+    respond_to do |format|
+      format.html do
+        redirect_back(fallback_location: product_path(@product), notice: msg)
+      end
+      format.js
     end
   end
-
-  def edit; end
-
-  def update; end
 
   def destroy
     @review = Review.find(params[:id])
     authorize @review
-    if @review.destroy
-      redirect_back(fallback_location: product_path(@reviewable),
-                    notice: 'Review Was Succesfully Deleted')
-    else
-      redirect_back(fallback_location: product_path(@reviewable),
-                    alert: 'Failed to Delete a Review')
+    msg = @review.destroy! == true ? 'Review Deleted' : 'Failed to Destroy'
+    respond_to do |format|
+      format.html do
+        redirect_back(fallback_location: product_path(@product), notice: msg)
+      end
+      format.js
     end
   end
 
@@ -41,10 +38,14 @@ class ReviewsController < ApplicationController
   end
 
   def set_reviewable
-    if params[:review_id]
-      @reviewable = Review.find(params[:review_id])
-    elsif params[:product_id]
-      @reviewable = Product.find(params[:product_id])
-    end
+    @reviewable = if params[:review_id]
+                    Review.find(params[:review_id])
+                  elsif params[:product_id]
+                    Product.find(params[:product_id])
+                  end
+  end
+
+  def set_product
+    @product = Product.find(params[:product])
   end
 end

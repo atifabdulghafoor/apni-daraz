@@ -16,6 +16,10 @@
   height: 90%;
 }
 
+.card-body{
+  padding : 10px;
+}
+
 .card-img-top {
   height: 7.5rem;
 }
@@ -46,17 +50,17 @@
   width: 75%;
 }
 
-#review {
+.review {
   padding: 0; 
   margin: 0;
   height: auto;
 }
 
-#review-replies {
+.review-replies {
   padding-left: 20%;
 }
 
-#reply {
+.reply {
   padding-left:20%;
   border: none; 
   padding: 0;

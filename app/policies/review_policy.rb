@@ -3,8 +3,8 @@
 # Review Policy
 class ReviewPolicy < ApplicationPolicy
   def create?
-    return true unless (admin? && (review.reviewable_type == 'Product')) ||
-                       (moderator? && (review.reviewable_type == 'Product'))
+    return true unless (admin? || moderator?) &&
+                       (review.reviewable_type == 'Product')
   end
 
   def show_links?

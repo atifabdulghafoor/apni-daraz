@@ -28,9 +28,12 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @product
+  end
 
   def update
+    authorize @product
     if @product.update(product_params)
       redirect_to @product
       flash[:notice] = 'Product Updated Successfully'
@@ -41,6 +44,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    authorize @product
     if @product.destroy
       redirect_to products_path
       flash[:notice] = 'Product Deleted Successfully'

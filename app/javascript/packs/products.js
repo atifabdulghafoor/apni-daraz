@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', function(){
   $('#user_image').on('change', function() {
     showImage(this);
   });
-
+  
   $("#product_category_id").prop('disabled', true)
   $("#product_parent_category").change(function(){
     var selectedOption = $(this).find(":selected").val();
