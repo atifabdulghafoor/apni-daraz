@@ -24,7 +24,7 @@ class ProductPolicy < ApplicationPolicy
     admin?
   end
 
-  def delete?
+  def destroys?
     admin?
   end
 

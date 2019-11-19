@@ -1,3 +1,7 @@
-$("#reviewModal-<%= @review.id%> .close").click()
-$("#review-<%= @review.id%> #content").html('')
-$("#review-<%= @review.id%> #content").html("<%= j @review.content %>")
+<% if @review.errors.any? %>
+  $("#errors").html("<%= j render partial: 'reviews/errors', locals: { review: @review } %>")
+<% else %>
+  $("#reviewModal-<%= @review.id%> .close").click()
+  $("#review-<%= @review.id%> #content").html('')
+  $("#review-<%= @review.id%> #content").html("<%= j @review.content %>")
+<% end %>

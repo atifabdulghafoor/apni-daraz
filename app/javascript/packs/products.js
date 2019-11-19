@@ -9,34 +9,33 @@ $(document).on('turbolinks:load', function(){
       reader.readAsDataURL(input.files[0]);
     }
   };
-
   $('#user_image').on('change', function() {
     showImage(this);
   });
-  
-  $("#product_category_id").prop('disabled', true)
+
+  $("#product_category_id").prop('disabled', true);
   $("#product_parent_category").change(function(){
     var selectedOption = $(this).find(":selected").val();
     if(selectedOption) {
       $("#product_category_id").prop('disabled', false)
+      $.ajax({
+        url:  "/categories_list",
+        type: "POST",
+        data: {
+          parent_id : selectedOption
+        },
+        success: function(data) { 
+          console.log(data)
+          $('#product_category_id').empty();
+          $('#product_category_id').append($("<option>Select</option>").val(undefined));
+          $.each(data.subcategories, function($index, $value) {
+            $('#product_category_id').append($("<option></option>").val($value[0]).html($value[1]));
+          });
+        }
+      });
     } 
     else {
       $("#product_category_id").prop('disabled', true)
     }
-    $.ajax({
-      url:  "/categories_list",
-      type: "post",
-      dataType: "json",
-      data: {
-        parent_id : selectedOption
-      },
-      success: function(data) { 
-        $('#product_category_id').empty();
-        $('#product_category_id').append($("<option>Select</option>").val(undefined));
-        $.each(data, function($index, $value) {
-          $('#product_category_id').append($("<option></option>").val($value.id).html($value.name));
-        });
-      }
-    });
   });
 });

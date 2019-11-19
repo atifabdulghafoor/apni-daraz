@@ -7,7 +7,7 @@
   = bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     = render "devise/shared/error_messages", resource: resource
     #image-field.field.mx-auto
-      = f.file_field :image, multiple: false, accept: "image/png,image/gif,image/jpeg", skip_label: true
+      = f.file_field :image, multiple: false, accept: "image/png,image/jpeg", skip_label: true
     .field
       = f.text_field :firstname, required: true
     .field

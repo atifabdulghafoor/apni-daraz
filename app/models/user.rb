@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_one_attached :image
 
+  validates :firstname, presence: true
+  validates :lastname, presence: true
+  validates :image, content_type: %i[png jpeg jpg]
+
   after_create :assign_default_role
 
   def assign_default_role

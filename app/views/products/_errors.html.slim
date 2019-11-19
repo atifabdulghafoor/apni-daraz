@@ -1,0 +1,10 @@
+- if @product && @product.errors.any?
+  .alert.alert-danger.alert-dismissible.fade.show role="alert"
+    button.close aria-label="Close" data-dismiss="alert" type="button" 
+      span aria-hidden="true"  ×
+    h4.alert-heading
+      = pluralize(@product.errors.count, "error")
+      | prohibited this product from being saved:
+    ul
+      - @product.errors.full_messages.each do |msg|
+        li= msg

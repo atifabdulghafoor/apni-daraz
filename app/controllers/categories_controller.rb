@@ -2,16 +2,13 @@
 
 # Categories controller
 class CategoriesController < ApplicationController
-  respond_to :json
   def categories_list
-    @categories = if params[:parent_id]
-                    Category.where(parent_id: params[:parent_id])
-                  else
-                    Category.all
-                  end
+    @categories = Category.where(parent_id: params[:parent_id])
 
-    respond_with(@categories) do |format|
-      format.json { render json: @categories.to_json(only: %i[id name]) }
+    respond_to do |format|
+      format.json do
+        render json: { subcategories: @categories.pluck(:id, :name) }
+      end
     end
   end
 end

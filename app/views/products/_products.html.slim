@@ -1,0 +1,17 @@
+- products.order(:created_at).each do |product|    
+  div.col-lg-3.mt-1
+    - product_image = product.images.attached? ? url_for(product.images.first) : "https://cdn.mos.cms.futurecdn.net/2P4QiZubHpgmGsujBa5RU5-1920-80.jpg"
+    .card
+      img.card-img-top alt=("Card image cap") src=(product_image)
+      #card-title.card-body
+        h6.card-title = product.name
+      .card-body
+        = number_to_currency(product.price) 
+        = link_to "", product_path(product), class: "stretched-link"
+- if (current_user) && policy(current_user).index? 
+  #Add-Product.col-lg-3.mt-1
+    .card
+      img.card-img-top.mt-4 alt=("Card image cap") src="https://image.flaticon.com/icons/svg/32/32339.svg" /
+      #card-title.card-body
+        h6.card-title.mt-4.text-lg-center Add Product
+        = link_to "", new_product_path, class: "stretched-link"

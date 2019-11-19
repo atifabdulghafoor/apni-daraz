@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :reviews, concerns: :reviewable
   
   post 'categories_list' => "categories#categories_list", as: :categories_list
+  get 'search' => "products#search", as: :search
 
   devise_for :users
 end

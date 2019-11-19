@@ -2,9 +2,9 @@
 
 # Products Controller
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show search]
   before_action :set_product, only: %i[show edit update destroy]
-  before_action :set_categories, only: %i[new index edit]
+  before_action :set_categories, except: %i[destroy]
   before_action :set_products, only: %i[index]
 
   def index; end
@@ -21,10 +21,8 @@ class ProductsController < ApplicationController
     authorize @product
     if @product.save
       redirect_to @product
-      flash[:notice] = 'Product Added Successfully'
     else
       render 'new'
-      flash[:alert] = 'Failed to Add Product'
     end
   end
 
@@ -36,21 +34,18 @@ class ProductsController < ApplicationController
     authorize @product
     if @product.update(product_params)
       redirect_to @product
-      flash[:notice] = 'Product Updated Successfully'
     else
       render 'edit'
-      flash[:alert] = 'Failed to Update'
     end
   end
 
   def destroy
     authorize @product
-    if @product.destroy
-      redirect_to products_path
-      flash[:notice] = 'Product Deleted Successfully'
-    else
-      flash[:alert] = 'Failed to Delete'
-    end
+    redirect_to products_path if @product.destroy
+  end
+
+  def search
+    get_products_by_search(params[:search])
   end
 
   private
@@ -83,6 +78,13 @@ class ProductsController < ApplicationController
                 else
                   Product.where(category: @category)
                 end
+    @products
+  end
+
+  def get_products_by_search(search)
+    search = "%#{search.downcase}%"
+    @products = Product.where('lower(name) LIKE ? OR lower(description) LIKE ?',
+                              search, search)
     @products
   end
 end

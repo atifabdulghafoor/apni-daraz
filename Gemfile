@@ -22,7 +22,9 @@ gem 'bootstrap', '~> 4.3.1'
 
 gem 'bootstrap_form', '~> 4.0'
 
-gem 'mini_magick'
+gem 'active_storage_validations'
+
+gem 'mini_magick', '>= 4.9.5'
 
 gem 'rails_admin', '~> 2.0'
 

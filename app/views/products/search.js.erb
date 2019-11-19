@@ -1,0 +1,2 @@
+$("#products-container").empty()
+$("#products-container").html("<%= j render partial: 'products/products', locals: { products: @products }%>")

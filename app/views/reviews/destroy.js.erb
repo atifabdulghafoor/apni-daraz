@@ -1,1 +1,5 @@
-$("#review-<%= @review.id%>").remove()
+<% if @review.errors.any? %>
+  $("#errors").html("<%= j render partial: 'reviews/errors', locals: { review: @review } %>")
+<% else %>
+  $("#review-<%= @review.id%>").remove()
+<% end %>

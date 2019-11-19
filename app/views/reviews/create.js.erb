@@ -1,8 +1,12 @@
-<% if @review.reviewable_type == "Product" %>
-  $("#review_content").val("")
-  $("#reviews").prepend("<%= j render @review %>")
+<% if @review.errors.any? %>
+  $("#errors").html('<%= j render partial: 'reviews/errors', locals: { review: @review } %>')
 <% else %>
-  $("#replyModal-<%= @review.reviewable.id%> .close").click()
-  $("#replyModal-<%= @review.reviewable.id%> #review_content").val("")
-  $("#review-<%= @review.reviewable.id%> .review-replies .card-body").first().append("<%= j render partial: 'reviews/reply', locals: { reply: @review } %>")
+  <% if @review.reviewable_type == "Product" %>
+    $("#review_content").val("")
+    $("#reviews").prepend("<%= j render @review %>")
+  <% else %>
+    $("#replyModal-<%= @review.reviewable.id%> .close").click()
+    $("#replyModal-<%= @review.reviewable.id%> #review_content").val("")
+    $("#review-<%= @review.reviewable.id%> .review-replies .card-body").first().append("<%= j render partial: 'reviews/reply', locals: { reply: @review } %>")
+  <% end %>
 <% end %>
