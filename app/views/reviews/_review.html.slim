@@ -1,5 +1,5 @@
 div.review.card id="review-#{review.id}"
-  .card-body
+  .card-body.ml-5
     blockquote.blockquote.mb-0
       p id="content" = review.content
       footer.blockquote-footer
@@ -7,11 +7,9 @@ div.review.card id="review-#{review.id}"
         small
           |  Submitted #{time_ago_in_words(review.created_at)} ago
           = render partial: 'reviews/link', locals: { review: review }
+        button.btn.btn-sm.float-right.mr-5 data-target="#replyModal-#{review.id}" data-toggle="modal" type="button" 
+          i.fa.fa-reply.fa-lg
   .review-replies
     .card-body
       = render partial: 'reviews/reply', collection: review.reviews.order(:created_at)
-    .card-body.text-center
-      /! Button trigger modal
-      button.btn.btn-secondary.btn-sm.w-25.mr-4 data-target="#replyModal-#{review.id}" data-toggle="modal" type="button" 
-        i.fa.fa-reply.fa-lg
       = render partial: 'reviews/form', locals: { review: Review.new, reviewable: review }

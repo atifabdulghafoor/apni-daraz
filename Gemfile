@@ -44,6 +44,7 @@ gem 'jbuilder', '~> 2.7'
 
 # Devise for user auth
 gem 'devise'
+
 # Pundit
 gem 'pundit'
 # Slim for html

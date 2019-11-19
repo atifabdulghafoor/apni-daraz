@@ -8,11 +8,6 @@ html
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" rel="stylesheet" /
-
-    / script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
-    / script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
-    / script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
-
   body
     nav.navbar.navbar-expand-lg.navbar-light
       button.navbar-toggler aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button" 
@@ -28,14 +23,14 @@ html
               li.nav-item
                 = link_to "Profile", edit_user_registration_path, class: "nav-link"
               li.nav-item
-                = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link"
+                = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link", id: "logout"
               - if current_user.has_role? :admin
                 li.nav-item
                   = link_to "Admin Dashboard", rails_admin.dashboard_path, class: "nav-link"
           - else
               li.nav-item
-                = link_to "Log In", new_user_session_path, class: "nav-link"
+                = link_to "Log In", new_user_session_path, class: "nav-link", id: "login"
               li.nav-item
-                = link_to "Sign Up", new_user_registration_path, class: "nav-link"
+                = link_to "Sign Up", new_user_registration_path, class: "nav-link", id: "signup"
     = render partial: 'layouts/alerts'
     = yield

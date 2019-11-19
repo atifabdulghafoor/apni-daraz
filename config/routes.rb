@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   post 'categories_list' => "categories#categories_list", as: :categories_list
   get 'search' => "products#search", as: :search
 
-  devise_for :users
+  devise_for :users, controllers: {sessions: "sessions"}
 end

@@ -20,10 +20,18 @@ class ApplicationController < ActionController::Base
                                                                 image])
   end
 
+  def after_sign_in_path_for(_)
+    session[:previous_url] || root_path
+  end
+
+  def after_sign_out_path_for(_)
+    request.referer || root_path
+  end
+
   private
 
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
-    redirect_to root_path
+    redirect_to(request.referer || root_path)
   end
 end
