@@ -8,7 +8,7 @@
       .card-body
         = number_to_currency(product.price) 
         = link_to "", product_path(product), class: "stretched-link"
-- if (current_user) && policy(current_user).index? 
+- if current_user && (current_user.has_role? :admin)
   #Add-Product.col-lg-3.mt-1
     .card
       img.card-img-top.mt-4 alt=("Card image cap") src="https://image.flaticon.com/icons/svg/32/32339.svg" /

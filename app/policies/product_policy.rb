@@ -2,13 +2,13 @@
 
 # Product Policy
 class ProductPolicy < ApplicationPolicy
-  def admin?
-    user && (user.has_role? :admin)
-  end
+  attr_reader :user, :product
 
-  private
+  def initialize(user, product)
+    super
+    raise Pundit::NotAuthorizedError.new(policy: 'product') unless admin?
 
-  def product
-    record
+    @user = user
+    @product = product
   end
 end

@@ -17,20 +17,8 @@ class ReviewPolicy < ApplicationPolicy
 
   private
 
-  def admin?
-    user && (user.has_role? :admin)
-  end
-
-  def moderator?
-    user && (user.has_role? :moderator)
-  end
-
   def owner?
     user && (user == review.user)
-  end
-
-  def customer?
-    user.has_role? :customer
   end
 
   def review

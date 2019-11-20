@@ -3,6 +3,7 @@
 # Products Controller
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show search]
+  skip_before_action :authorize_user, only: %i[index show search]
   before_action :set_product, only: %i[show edit update destroy]
   before_action :set_categories, except: %i[destroy]
   before_action :set_products, only: %i[index]
@@ -13,12 +14,10 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    authorize @product, :admin?
   end
 
   def create
     @product = current_user.products.build(product_params)
-    authorize @product, :admin?
     if @product.save
       redirect_to @product
     else
@@ -26,12 +25,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-    authorize @product, :admin?
-  end
+  def edit; end
 
   def update
-    authorize @product, :admin?
     if @product.update(product_params)
       redirect_to @product
     else
@@ -40,7 +36,6 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    authorize @product, :admin?
     redirect_to products_path if @product.destroy
   end
 
@@ -86,5 +81,9 @@ class ProductsController < ApplicationController
     @products = Product.where('lower(name) LIKE ? OR lower(description) LIKE ?',
                               search, search)
     @products
+  end
+
+  def authorize_user
+    authorize Product
   end
 end

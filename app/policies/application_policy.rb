@@ -9,32 +9,20 @@ class ApplicationPolicy
     @record = record
   end
 
-  def index?
-    false
+  def method_missing(_name, *args)
+    true || super
   end
 
-  def show?
-    false
+  def respond_to_missing?(*_args)
+    true
   end
 
-  def create?
-    false
+  def admin?
+    user && (user.has_role? :admin)
   end
 
-  def new?
-    create?
-  end
-
-  def update?
-    false
-  end
-
-  def edit?
-    update?
-  end
-
-  def destroy?
-    false
+  def moderator?
+    user && (user.has_role? :moderator)
   end
 
   # Appication Policy > Scope

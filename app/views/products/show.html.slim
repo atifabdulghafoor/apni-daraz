@@ -28,7 +28,7 @@
       .row.mt-4 
         = link_to products_path, class: "btn btn-primary mr-2 w-25"
           i.fa.fa-arrow-left.fa-lg  
-        - if current_user && policy(@product).show?
+        - if current_user && (current_user.has_role? :admin)
             = link_to edit_product_path(@product), class: "btn btn-info mr-2"
               i.fa.fa-edit.fa-lg
             = link_to product_path(@product), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"

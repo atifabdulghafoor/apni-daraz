@@ -3,6 +3,7 @@
 # Reviews Controller
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :authorize_user
   before_action :set_review, only: %i[update destroy]
   before_action :set_reviewable, only: %i[create]
   before_action :set_product
