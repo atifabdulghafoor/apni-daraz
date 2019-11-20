@@ -37,7 +37,7 @@
     h5 REVIEWS
   .row.mt-4
     #review-form.container
-      - if policy(Review.new).show_form?
+      - if policy(@product.reviews.build).create?
         = bootstrap_form_for [@product, Review.new], remote: true do |f|
           = f.text_area :content, required: true, skip_label: true, placeholder: "Add a Review"
           = f.hidden_field :product, value: @product.id, name: 'product'

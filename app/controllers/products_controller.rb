@@ -13,12 +13,12 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    authorize @product
+    authorize @product, :admin?
   end
 
   def create
     @product = current_user.products.build(product_params)
-    authorize @product
+    authorize @product, :admin?
     if @product.save
       redirect_to @product
     else
@@ -27,11 +27,11 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    authorize @product
+    authorize @product, :admin?
   end
 
   def update
-    authorize @product
+    authorize @product, :admin?
     if @product.update(product_params)
       redirect_to @product
     else
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    authorize @product
+    authorize @product, :admin?
     redirect_to products_path if @product.destroy
   end
 
